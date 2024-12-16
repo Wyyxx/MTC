@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'landing.dart';
 
+// Clase principal del widget de inicio de sesión
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
 
+// Estado del widget de inicio de sesión
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>(); // Clave global para el formulario
+  final TextEditingController _emailController = TextEditingController(); // Controlador para el campo de correo electrónico
+  final TextEditingController _passwordController = TextEditingController(); // Controlador para el campo de contraseña
 
   // Variable para manejar la validación automática del formulario
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
@@ -19,6 +21,7 @@ class _LoginState extends State<Login> {
   bool _isLoading = false;
   String _errorMessage = '';
 
+  // Método para manejar el envío del formulario
   Future<void> _handleSubmit() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -71,20 +74,20 @@ class _LoginState extends State<Login> {
             OrientationBuilder(
               builder: (context, orientation) {
                 if (orientation == Orientation.portrait) {
-                  return _buildVerticalLayout();
+                  return _buildVerticalLayout(); // Construir diseño vertical
                 } else {
-                  return _buildHorizontalLayout();
+                  return _buildHorizontalLayout(); // Construir diseño horizontal
                 }
               },
             ),
             Positioned(
               left: 0,
               right: 0,
-              bottom: 16,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 16,
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
-                  'Versión 0.0.5',
+                  'Versión 0.4.36',
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 12,
@@ -98,6 +101,7 @@ class _LoginState extends State<Login> {
     );
   }
 
+  // Método para construir el diseño vertical
   Widget _buildVerticalLayout() {
     return SingleChildScrollView(
       child: Container(
@@ -198,20 +202,6 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
-                  child: Text('No tengo cuenta'),
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.resolveWith(
-                      (states) {
-                        return Colors.black;
-                      },
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -220,6 +210,7 @@ class _LoginState extends State<Login> {
     );
   }
 
+  // Método para construir el diseño horizontal
   Widget _buildHorizontalLayout() {
     return SingleChildScrollView(
       child: Container(
@@ -312,20 +303,6 @@ class _LoginState extends State<Login> {
                     // Funcionalidad para restablecer contraseña (no implementada)
                   },
                   child: Text('Olvidé mi contraseña'),
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.resolveWith(
-                      (states) {
-                        return Colors.black;
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
-                  child: Text('No tengo cuenta'),
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.resolveWith(
                       (states) {
